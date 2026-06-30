@@ -1,6 +1,25 @@
 import { WebSocketServer } from "ws";
 
-const wss = new WebSocketServer({ port: 8080 });
+const allowedOrigins = [
+  "http://127.0.0.1:5500/",
+  "https://vishnurvp2.github.io/p2pchat/",
+];
+
+const wss = new WebSocketServer({
+  port: 8080,
+  verifyClient: (info, callback) => {
+    // Extract the origin header from the upgrade request
+    const origin = info.origin;
+
+    if (allowedOrigins.includes(origin)) {
+      // Accept the connection
+      callback(true);
+    } else {
+      // Reject the connection (Sends 401 Unauthorized by default)
+      callback(false, 403, "Forbidden");
+    }
+  },
+});
 
 // Active clients map: { "123456": socketInstance }
 const clients = new Map();

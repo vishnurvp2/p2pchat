@@ -1,5 +1,5 @@
 // --- 1. Global State Configuration ---
-const wsUrl = "ws://localhost:8080";
+const wsUrl = "wss://p2pchat-jzgk.onrender.com";
 let socket;
 let yourId = null;
 let peerId = null;
