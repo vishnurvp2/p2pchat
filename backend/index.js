@@ -1,8 +1,8 @@
 import { WebSocketServer } from "ws";
 
 const allowedOrigins = [
-  "http://127.0.0.1:5500/",
-  "https://vishnurvp2.github.io/p2pchat/",
+  "http://127.0.0.1:5500",
+  "https://vishnurvp2.github.io/p2pchat",
 ];
 
 const wss = new WebSocketServer({
