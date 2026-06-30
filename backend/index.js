@@ -14,7 +14,7 @@ const wss = new WebSocketServer({
 
 const allowedOrigins = [
   "http://127.0.0.1:5500",
-  "https://vishnurvp2.github.io/p2pchat",
+  "https://vishnurvp2.github.io",
 ];
 
 // 3. Intercept HTTP Upgrade requests manually
