@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>P2P Chat</title>
+  </head>
+  <body>
+    <h1>P2P Chat</h1>
+    <div class="connectionContainer">
+      <div>
+        <label for="yourId">Your ID : </label>
+        <input type="text" name="yourId" id="yourId" />
+      </div>
+      <div>
+        <label for="peerId">Peer ID : </label>
+        <input type="text" name="peerId" id="peerId" />
+      </div>
+      <button id="connect">Connect</button>
+    </div>
+    <div id="statusText" style="color: #666; font-style: italic">
+      Status: Not connected
+    </div>
+    <div class="chatboxContainer" id="chatboxContainer">
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+      <p class="sender">Hello</p>
+      <p class="reciver">Good morning</p>
+    </div>
+    <div class="sendMessageContainer">
+      <input type="text" name="message" id="message" />
+      <button id="sendMessage">Send</button>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

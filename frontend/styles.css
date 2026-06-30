@@ -1,0 +1,59 @@
+:root,
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0 auto;
+  width: 80vw;
+  text-align: center;
+}
+
+h1 {
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.connectionContainer {
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.connectionContainer > * {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.chatboxContainer {
+  width: 70%;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+.sendMessageContainer {
+  width: 50%;
+  margin: 0 auto;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.chatboxContainer .sender {
+  width: 70%;
+  text-align: right;
+  align-self: flex-end;
+}
+
+.chatboxContainer .reciver {
+  text-align: left;
+  width: 70%;
+  align-self: flex-start;
+}
