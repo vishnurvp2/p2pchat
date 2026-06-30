@@ -1,24 +1,36 @@
+import http from "http";
 import { WebSocketServer } from "ws";
+
+// A native HTTP server to satisfy Render's HTTP routing proxy
+const server = http.createServer((req, res) => {
+  // Returns a friendly status check message if visited in a browser via https://
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Signaling Server is Alive and Healthy!");
+});
+
+const wss = new WebSocketServer({
+  noServer: true, // We will manually handle the connection upgrade
+});
 
 const allowedOrigins = [
   "http://127.0.0.1:5500",
   "https://vishnurvp2.github.io/p2pchat",
 ];
 
-const wss = new WebSocketServer({
-  port: 8080,
-  verifyClient: (info, callback) => {
-    // Extract the origin header from the upgrade request
-    const origin = info.origin;
+// 3. Intercept HTTP Upgrade requests manually
+server.on("upgrade", (req, socket, head) => {
+  const origin = req.headers.origin;
 
-    if (allowedOrigins.includes(origin)) {
-      // Accept the connection
-      callback(true);
-    } else {
-      // Reject the connection (Sends 401 Unauthorized by default)
-      callback(false, 403, "Forbidden");
-    }
-  },
+  if (!allowedOrigins.includes(origin)) {
+    socket.write("HTTP/1.1 403 Forbidden\r\n\r\n");
+    socket.destroy();
+    return;
+  }
+
+  // Hand over the network socket directly to ws
+  wss.handleUpgrade(req, socket, head, (ws) => {
+    wss.emit("connection", ws, req);
+  });
 });
 
 // Active clients map: { "123456": socketInstance }
@@ -91,4 +103,7 @@ wss.on("connection", (socket) => {
   });
 });
 
-console.log("ID-based Signaling Server running... ");
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Server listening natively on port ${PORT}`);
+});
